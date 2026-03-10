@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/afc-coin-miner/static/css/main.359d259c.css",
-    "main.js": "/afc-coin-miner/static/js/main.d1bc9e75.js",
-    "index.html": "/afc-coin-miner/index.html",
-    "main.359d259c.css.map": "/afc-coin-miner/static/css/main.359d259c.css.map",
-    "main.d1bc9e75.js.map": "/afc-coin-miner/static/js/main.d1bc9e75.js.map"
+    "main.css": "/static/css/main.359d259c.css",
+    "main.js": "/static/js/main.d1bc9e75.js",
+    "index.html": "/index.html",
+    "main.359d259c.css.map": "/static/css/main.359d259c.css.map",
+    "main.d1bc9e75.js.map": "/static/js/main.d1bc9e75.js.map"
   },
   "entrypoints": [
     "static/css/main.359d259c.css",
