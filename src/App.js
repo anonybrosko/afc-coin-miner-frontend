@@ -6,10 +6,18 @@ function App() {
 
   const mineCoin = async () => {
     // Simulate mining reward
-    const response = await fetch("https://afc-coin-miner-backend.onrender.com/mine")
-    const data = await response.json()
-    setBalance(data.balance);
-    setClicks(data.clicks)
+    const reward = Math.floor(Math.random() * 5) + 1;
+    setBalance(prev => prev + reward);
+    setClicks(prev => prev + 1);
+
+    try {
+      const response = await fetch("https://afc-coin-miner-backend.onrender.com/mine");
+      const data = await response.json();
+      setBalance(data.balance);
+      setClicks(data.clicks);
+    } catch (err){
+      console.error("Backend unreachable", err);
+    }
   };
 
   return (
