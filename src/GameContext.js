@@ -20,7 +20,7 @@ export const GameProvider = ({ children }) => {
     return /android|iphone|ipad|ipod|mobile|telegram/i.test(ua);
   };
 
-  const [isMobile, setIsMobile] = useState(detectMobile);
+  const [isMobile, setIsMobile] = useState(detectMobile());
 
   useEffect(() => {
     const handleResize = () => {
