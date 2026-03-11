@@ -6,33 +6,36 @@ body {
   text-align: center;
   padding-top: 50px;
   margin: 0;
+  font-size: 4vw; /* Base font scales with viewport width */
+  line-height: 1.4;
 }
 
 /* Headings */ 
 h1 {
-  font-size: 2.5rem;
+  font-size: 6vw; /* Scales with device */
   color: #00ff99;
   text-shadow: 2px 2px 5px #008844, 0 0 3px #00ff44;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 5vw;
   color: #ffcc00;
   text-shadow: 2px 2px 5px #aa8800, 0 0 8px #ffcc00;
-  margin-bottom: 12px;
+  margin-bottom: 0.8rem;
 }
 
 /* Container for pages */
 .container {
   max-width: 400px;
-  margin: 50px auto;
+  margin: 5vw auto;
   background: #1a1a1a;
-  padding: 20px;
+  padding: 4vw;
   border-radius: 12px;
-  box-shadow: 0 0 20px #00ff99;
+  box-shadow: 0 0 2vw #00ff99;
   color: #f5f5f5;
   text-align: center;
+  font-size: 1em;
 }
 
 /* Desktop Default */
@@ -45,41 +48,41 @@ h2 {
 /* Mobile Adjustments */
 .container.mobile {
   max-width: 90%;
-  padding: 15px;
-  font-size: 14px;
+  padding: 3vw;
+  font-size: 3.5vw;
 }
 
 /* Buttons */
 button {
   background: #00ff99;
   color: #000;
-  font-size: 16px;
-  padding: 10px 20px;
+  font-size: 4vw;
+  padding: 2vw 4vw;
   border: none;
-  border-radius: 8px;
+  border-radius: 1vw;
   cursor: pointer;
-  margin-top: 20px;
-  box-shadow: 0 4px #00cc77;
+  margin-top: 2vw;
+  box-shadow: 0 1vw #00cc77;
   transition: all 0.1s ease-in-out;
 }
 
 button:hover {
   background: #00cc77;
-  transform: translateY(2px);
-  box-shadow: 0 2px #008844;
+  transform: translateY(0.5vw);
+  box-shadow: 0 0.5vw #008844;
 }
 
 /* Prestige Button */
 .prestige-button {
   background: #ffcc00;
   color: #000;
-  font-size: 16px;
-  padding: 10px 20px;
+  font-size: 4vw;
+  padding: 2vw 4vw;
   border: none;
-  border-radius: 8px;
+  border-radius: 1vw;
   cursor: pointer;
-  margin-top: 20px;
-  box-shadow: 3px 3px 8px #ffaa00;
+  margin-top: 2vw;
+  box-shadow: 0.8vw 0.8vw 2vw #ffaa00;
   font-weight: bold;
 }
 
@@ -97,30 +100,54 @@ button:hover {
 .navbar {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 2vw;
+  margin-bottom: 3vw;
+}
+
+/* Desktop Default */
+.navbar.desktop {
+  max-width: 400px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+/* Mobile Adjustments */
+.navbar.mobile {
+  max-width: 90%;
+  padding: 0 0 3vw 3vw;
+  font-size: 3vw;
 }
 
 .navbar a {
-  padding: 10px 20px;
+  padding: 2vw 4vw;
   background-color: #00ff99;
   color: #000;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 1vw;
   font-weight: bold;
-  box-shadow: 0 4px #00cc77;
+  box-shadow: 0 1vw #00cc77;
   transition: all 0.1s ease-in-out;
 }
 
 .navbar a:hover {
-  transform: translateY(2px);
-  box-shadow: 0 2px #008844;
+  transform: translateY(0.5vw);
+  box-shadow: 0 0.5vw #008844;
 }
 
 /* Balance Display in top right */
 .balance-display {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 2vw;
+  right: 2vw;
   font-weight: bold;
+  font-size: 4vw;
+}
+
+/* Media query for very large screens */
+@media (min-width: 1024px) {
+  body { font-size: 16px; }
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  button, .prestige-button { font-size: 16px; padding: 10px 20px; }
+  .balance-display { font-size: 16px; top: 20px; right: 20px; }
 }

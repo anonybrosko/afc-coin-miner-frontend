@@ -5,12 +5,13 @@ import Home from "./Home";
 import Mine from "./Mine";
 import Upgrades from "./Upgrades";
 import Prestige from "./Prestige"
+import './App.css';
 
 function Header(){
-  const { balance } = useContext(GameContext);
+  const { balance, isMobile } = useContext(GameContext);
   return (
   <div>
-      <nav className="navbar">
+      <nav className={`navbar ${isMobile ? "mobile" : "desktop"}`}>
         <Link to="/">Home</Link>
         <Link to="/mine">Mine</Link>
         <Link to="/upgrades">Upgrades</Link>
@@ -22,15 +23,18 @@ function Header(){
 }
 
 function App() {
+  const { isMobile } = useContext(GameContext);
   return (
     <Router>
-      <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/mine" element={<Mine />} />
-          <Route path="/upgrades" element={<Upgrades />} />
-          <Route path="/prestige" element={<Prestige />} />
-        </Routes>
+      <div className={`container ${isMobile ? "mobile" : "desktop"}`}>
+        <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/mine" element={<Mine />} />
+            <Route path="/upgrades" element={<Upgrades />} />
+            <Route path="/prestige" element={<Prestige />} />
+          </Routes>
+        </div>
     </Router>
   );
 }

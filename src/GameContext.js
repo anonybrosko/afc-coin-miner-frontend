@@ -13,18 +13,19 @@ export const GameProvider = ({ children }) => {
   const [upgrades, setUpgrades] = useState(saved.upgrades || { pickaxe: 1 });
   const [prestige, setPrestige] = useState(saved.prestige || 0);
 
-  // Better mobile detection
   const detectMobile = () => {
     if (typeof navigator === "undefined") return false;
     const ua = navigator.userAgent || navigator.vendor || window.opera;
-    return /android|iphone|ipad|ipod|mobile|telegram/i.test(ua);
+    const mobileUA = /android|iphone|ipad|ipod|mobile|tablet|iemobile|ipad/i.test(ua);
+    const smallScreen = typeof window !== "undefined" && window.innerWidth <= 768;
+    return mobileUA || smallScreen;
   };
 
   const [isMobile, setIsMobile] = useState(detectMobile());
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768 || detectMobile());
+      setIsMobile(detectMobile());
     }; 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -68,7 +69,7 @@ export const GameProvider = ({ children }) => {
 
   return (
     <GameContext.Provider
-      value={{ balance, clicks, upgrades, prestige, mineCoin, buyUpgrade, doPrestige }}
+      value={{ balance, clicks, upgrades, prestige, mineCoin, buyUpgrade, doPrestige, isMobile }}
     >
       {children}
     </GameContext.Provider>
