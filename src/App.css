@@ -35,6 +35,20 @@ h2 {
   text-align: center;
 }
 
+/* Desktop Default */
+.container.desktop {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Mobile Adjustments */
+.container.mobile {
+  max-width: 90%;
+  padding: 15px;
+  font-size: 14px;
+}
+
 /* Buttons */
 button {
   background: #00ff99;
