@@ -13,11 +13,18 @@ export const GameProvider = ({ children }) => {
   const [upgrades, setUpgrades] = useState(saved.upgrades || { pickaxe: 1 });
   const [prestige, setPrestige] = useState(saved.prestige || 0);
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  // Better mobile detection
+  const detectMobile = () => {
+    if (typeof navigator === "undefined") return false;
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    return /android|iphone|ipad|ipod|mobile|telegram/i.test(ua);
+  };
+
+  const [isMobile, setIsMobile] = useState(detectMobile);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 768 || detectMobile());
     }; 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
