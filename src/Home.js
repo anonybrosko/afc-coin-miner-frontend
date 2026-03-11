@@ -23,7 +23,7 @@ const Home = () => {
         <h1>Home</h1>
         <div className="card">
           <h2>Balance</h2>
-          <p>{balance} AFC</p>
+          <p>{balance.toFixed(8)} AFC</p>
         </div>
         <div className="card">
           <h2>Total Clicks</h2>

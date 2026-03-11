@@ -3,11 +3,12 @@ import React, { useContext } from "react";
 import { GameContext } from "./GameContext";
 
 const Prestige = () => {
+  const roundCrypto = (num) => Number(num.toFixed(8));
   const { balance, prestige, doPrestige } = useContext(GameContext);
 
-  const prestigeThreshold = 1000;
+  const prestigeThreshold = 0.0001;
   const canPrestige = balance >= prestigeThreshold;
-  const remaining = canPrestige ? 0 : prestigeThreshold - balance;
+  const remaining = canPrestige ? 0 : roundCrypto(prestigeThreshold - balance);
   // const earnedPrestige = Math.floor(balance / 1000);
 
   return (
@@ -18,11 +19,11 @@ const Prestige = () => {
       </div>
       <h1>Prestige</h1>
       <p>Current Prestige: {prestige}</p>
-      <p>Balance: {balance} AFC</p>
+      <p>Balance: {balance.toFixed(8)} AFC</p>
       <p>
         {canPrestige 
           ? `Prestiging now will give you ${Math.floor(balance / prestigeThreshold)} prestige points.`
-          : `You need ${remaining} more AFC to prestige.`}
+          : `You need ${remaining.toFixed(8)} more AFC to prestige.`}
       </p>
       <button
         className={`prestige-button ${!canPrestige ? "disabled" : ""}`}

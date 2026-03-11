@@ -1,0 +1,139 @@
+import React, { createContext, useState, useEffect } from "react";
+
+export const GameContext = createContext();
+
+const API = "https://afc-coin-miner-backend.onrender.com";
+
+const roundCrypto = (num) => Number(num.toFixed(8));
+export const GameProvider = ({ children }) => {
+  // Load state from localStorage if present
+  const saved = JSON.parse(localStorage.getItem("afcGame")) || {};
+
+  const [balance, setBalance] = useState(saved.balance || 0);
+  const [clicks, setClicks] = useState(saved.clicks || 0);
+  const [upgrades, setUpgrades] = useState(saved.upgrades || { pickaxe: 1, autoMiner: 0 });
+  const [prestige, setPrestige] = useState(saved.prestige || 0);
+
+  const detectMobile = () => {
+    if (typeof navigator === "undefined") return false;
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    const mobileUA = /android|iphone|ipad|ipod|mobile|tablet|iemobile|ipad/i.test(ua);
+    const smallScreen = typeof window !== "undefined" && window.innerWidth <= 768;
+    return mobileUA || smallScreen;
+  };
+
+  const [isMobile, setIsMobile] = useState(detectMobile());
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(detectMobile());
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Save state to localStorage on every change
+  useEffect(() => {
+    localStorage.setItem(
+      "afcGame",
+      JSON.stringify({ balance, clicks, upgrades, prestige })
+    );
+  }, [balance, clicks, upgrades, prestige]);
+
+  // Inside GameProvider
+  const [psuEnergy, setPsuEnergy] = useState({}); // tracks energy per PSU
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      let totalAutoReward = 0;
+
+      Object.entries(upgrades).forEach(([name, level]) => {
+        const upg = allUpgrades[name]; // you'll define allUpgrades mapping name -> upgrade object
+        if (!upg) return;
+
+        // PSU boosts auto mining if energy left
+        if (upg.type === "psu") {
+          const remaining = psuEnergy[name] || upg.energy || 0;
+          if (remaining > 0) {
+            const reward = upg.effect * level;
+            totalAutoReward += reward;
+            setPsuEnergy(prev => ({ ...prev, [name]: Math.max(0, remaining - 0.00001) })); // energy depletes per second
+          }
+        }
+
+        // Network boosts could be handled similarly with duration
+      });
+
+      if (totalAutoReward > 0) {
+        setBalance(prev => roundCrypto(prev + totalAutoReward));
+      }
+
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [upgrades, psuEnergy]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (upgrades.autoMiner > 0) {
+        const reward = (upgrades.autoMiner * upgrades.pickaxe) * 0.0000005;
+
+        setBalance(prev => roundCrypto(prev + reward));
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [upgrades]);
+
+  const hashrate = ((upgrades.autoMiner || 0) * 2 + (upgrades.pickaxe || 1)) * 1;
+  const miningPower =
+      (upgrades.pickaxe || 1) +
+        (upgrades.drill || 0) * 3 +
+        (upgrades.excavator || 0) * 10 +
+        (upgrades.autoMiner || 0);
+  const autoMinerCount = upgrades.autoMiner || 0;
+
+  const mineCoin = async () => {
+    const baseReward = (Math.random() * 0.00000005) + 0.00000001;
+    const totalReward = roundCrypto(baseReward * miningPower);
+    setBalance((prev) => roundCrypto(prev + totalReward));
+    setClicks((prev) => prev + 1);
+
+    fetch(`${API}/mine`).catch(err => console.error("Backend unreachable", err));
+  };
+
+  const buyUpgrade = (name, cost) => {
+    if (balance >= cost) {
+      setBalance((prev) => roundCrypto(prev - cost));
+      setUpgrades((prev) => ({
+        ...prev,
+        [name]: (prev[name] || 0) + 1,
+      }));
+    }
+  };
+
+  const doPrestige = () => {
+    const earnedPrestige = Math.floor(balance / 0.0001);
+    if (earnedPrestige > 0) {
+      setBalance(0.00000000);
+      setClicks(0);
+      setUpgrades({ pickaxe: 1, autoMiner: 0 });
+      setPrestige((prev) => prev + earnedPrestige);
+    }
+  };
+
+  return (
+    <GameContext.Provider
+      value={{ balance, clicks, upgrades, prestige, mineCoin, buyUpgrade, doPrestige, isMobile, hashrate, miningPower, autoMinerCount }}
+    >
+      {children}
+      <button
+        onClick={() => {
+            localStorage.removeItem("afcGame");
+                window.location.reload();
+                  }}
+                  >
+        Reset Game
+      </button>
+    </GameContext.Provider>
+  );
+};
