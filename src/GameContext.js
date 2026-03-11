@@ -10,7 +10,7 @@ export const GameProvider = ({ children }) => {
 
   const [balance, setBalance] = useState(saved.balance || 0);
   const [clicks, setClicks] = useState(saved.clicks || 0);
-  const [upgrades, setUpgrades] = useState(saved.upgrades || { pickaxe: 1 });
+  const [upgrades, setUpgrades] = useState(saved.upgrades || { pickaxe: 1, autoMiner: 0 });
   const [prestige, setPrestige] = useState(saved.prestige || 0);
 
   const detectMobile = () => {
@@ -39,11 +39,28 @@ export const GameProvider = ({ children }) => {
     );
   }, [balance, clicks, upgrades, prestige]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (upgrades.autoMiner > 0) {
+        const reward = upgrades.autoMiner * upgrades.pickaxe;
+
+        setBalance(prev => prev + reward);
+        setClicks(prev => prev + upgrades.autoMiner);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [upgrades]);
+
+  const hashrate = ((upgrades.autoMiner || 0) * 2 + (upgrades.pickaxe || 1)) * 1;
+  const miningPower = (upgrades.pickaxe || 1) + (upgrades.autoMiner || 0);
+  const autoMinerCount = upgrades.autoMiner || 0;
+
   const mineCoin = async () => {
     const baseReward = Math.floor(Math.random() * 5) + 1;
     const totalReward = baseReward * (upgrades.pickaxe || 1);
     setBalance((prev) => prev + totalReward);
     setClicks((prev) => prev + 1);
+
     fetch(`${API}/mine`).catch(err => console.error("Backend unreachable", err));
   };
 
@@ -69,7 +86,7 @@ export const GameProvider = ({ children }) => {
 
   return (
     <GameContext.Provider
-      value={{ balance, clicks, upgrades, prestige, mineCoin, buyUpgrade, doPrestige, isMobile }}
+      value={{ balance, clicks, upgrades, prestige, mineCoin, buyUpgrade, doPrestige, isMobile, hashrate, miningPower, autoMinerCount }}
     >
       {children}
     </GameContext.Provider>

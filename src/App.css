@@ -25,129 +25,198 @@ h2 {
   margin-bottom: 0.8rem;
 }
 
-/* Container for pages */
-.container {
-  max-width: 400px;
-  margin: 5vw auto;
-  background: #1a1a1a;
-  padding: 4vw;
+.card {
+  background: rgba(30, 30, 30, 0.85);
   border-radius: 12px;
-  box-shadow: 0 0 2vw #00ff99;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 400px;
+  box-shadow: 0 0 20px #00ff99, 0 0 40px #00ff9944;
+  backdrop-filter: blur(6px); /* glass effect */
   color: #f5f5f5;
   text-align: center;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+/* ----------------------------- */
+/* Container / Page Wrapper       */
+/* ----------------------------- */
+.container {
+  max-width: 400px;
+  z-index: 2;
+  margin: 5vw auto;
+  padding: 4vw;
+  color: #f5f5f5;
+  text-align: center;
+  position: relative;
   font-size: 1em;
 }
 
-/* Desktop Default */
+/* Desktop version */
 .container.desktop {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Mobile Adjustments */
+/* Mobile version */
 .container.mobile {
   max-width: 90%;
   padding: 3vw;
   font-size: 3.5vw;
 }
 
-/* Buttons */
-button {
-  background: #00ff99;
-  color: #000;
-  font-size: 4vw;
-  padding: 2vw 4vw;
-  border: none;
-  border-radius: 1vw;
-  cursor: pointer;
-  margin-top: 2vw;
-  box-shadow: 0 1vw #00cc77;
-  transition: all 0.1s ease-in-out;
+.card.hover {
+  transform: translateY(-2px);
+  /* box-shadow: 0 0 12px #00ff99, 0 0 25px #ff9944; */
 }
 
-button:hover {
-  background: #00cc77;
+.blockchain-float {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+}
+
+.block {
+  width: 20px;
+  height: 20px;
+  background: #00ff99;
+  opacity: 0.2;
+  border-radius: 4px;
+  position: absolute;
+  animation: floatBlock 5s infinite linear;
+}
+
+@keyframes floatBlock {
+  0% { transform: translateY(100vh) translateX(0); }
+  100% { transform: translateY(-20px) translateX(50vw); }
+}
+
+/* ----------------------------- */
+/* Buttons & Upgrade Buttons     */
+/* ----------------------------- */
+button,
+.upgrade-button,
+.prestige-button,
+.navbar a {
+  font-size: 3vw;
+  padding: 2vw 4vw;
+  border-radius: 2vw;
+  box-shadow: 0.5vw 0.5vw #00cc77;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.1s ease-in-out;
+  text-align: center;
+  vertical-align: middle;
+  margin-bottom: 2vw;
+}
+
+button:hover,
+.upgrade-button:hover,
+.prestige-button:hover,
+.navbar a:hover {
   transform: translateY(0.5vw);
   box-shadow: 0 0.5vw #008844;
 }
 
-/* Prestige Button */
-.prestige-button {
-  background: #ffcc00;
-  color: #000;
-  font-size: 4vw;
-  padding: 2vw 4vw;
-  border: none;
-  border-radius: 1vw;
-  cursor: pointer;
-  margin-top: 2vw;
-  box-shadow: 0.8vw 0.8vw 2vw #ffaa00;
-  font-weight: bold;
-}
-
-.prestige-button:hover {
-  background: #ffaa00;
-}
-
+/* Disabled Buttons */
+button.disabled,
+.upgrade-button.disabled,
 .prestige-button.disabled {
   background: #555;
   cursor: not-allowed;
   box-shadow: none;
 }
 
-/* Navigation Links */
+
+/* Specific Prestige Button */
+.prestige-button {
+  background: #ffcc00;
+  box-shadow: 0.8vw 0.8vw 2vw #ffaa00;
+}
+
+.prestige-button:hover {
+  background: #ffaa00;
+}
+
+/* Upgrade Buttons */
+.upgrade-button {
+  background: #00ff99;
+}
+
+.upgrade-button:hover {
+  background: #00cc77;
+}
+
+/* ----------------------------- */
+/* Navigation / Navbar            */
+/* ----------------------------- */
 .navbar {
   display: flex;
   justify-content: center;
-  gap: 2vw;
-  margin-bottom: 3vw;
+  gap: 15px;
+  margin-bottom: 10px;
 }
 
-/* Desktop Default */
+.navbar a {
+  background-color: #00ff99;
+  color: #000;
+  text-decoration: none;
+  border-radius: 2vw;
+  box-shadow: 0.5vw 0.5vw #00cc77;
+  font-weight: bold;
+}
+
+
+/* Desktop & Mobile Navbar */
 .navbar.desktop {
   max-width: 400px;
-  padding: 20px;
+  padding: 15px;
   margin: 0 auto;
 }
 
-/* Mobile Adjustments */
 .navbar.mobile {
   max-width: 90%;
   padding: 0 0 3vw 3vw;
   font-size: 3vw;
 }
 
-.navbar a {
-  padding: 2vw 4vw;
-  background-color: #00ff99;
-  color: #000;
-  text-decoration: none;
-  border-radius: 1vw;
-  font-weight: bold;
-  box-shadow: 0 1vw #00cc77;
-  transition: all 0.1s ease-in-out;
-}
-
-.navbar a:hover {
-  transform: translateY(0.5vw);
-  box-shadow: 0 0.5vw #008844;
-}
-
-/* Balance Display in top right */
+/* ----------------------------- */
+/* Balance Display / Floating Panel */
+/* ----------------------------- */
 .balance-display {
   position: absolute;
   top: 2vw;
   right: 2vw;
   font-weight: bold;
   font-size: 4vw;
+  background: rgba(0, 255, 153, 0.1);
+  padding: 0.5vw 1vw;
+  border-radius: 0.8vw;
+  box-shadow: 0 0 1vw #00ff99, 0 0 2vw #00ff9944;
 }
 
-/* Media query for very large screens */
+/* ----------------------------- */
+/* Media Query: Large Screens     */
+/* ----------------------------- */
 @media (min-width: 1024px) {
   body { font-size: 16px; }
   h1 { font-size: 2.5rem; }
   h2 { font-size: 2rem; }
-  button, .prestige-button { font-size: 16px; padding: 10px 20px; }
-  .balance-display { font-size: 16px; top: 20px; right: 20px; }
+  button,
+  .prestige-button,
+  .upgrade-button,
+  .navbar a {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px #00cc77;
+    margin-bottom: 10px;
+  }
+  .balance-display {
+    font-size: 16px;
+    top: 20px;
+    right: 20px;
+  }
 }

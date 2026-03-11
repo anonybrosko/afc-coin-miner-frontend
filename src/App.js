@@ -17,7 +17,7 @@ function Header(){
         <Link to="/upgrades">Upgrades</Link>
         <Link to="/prestige">Prestige</Link>
       </nav>
-      <div className="balance-display">Balance: {balance} AFC</div>
+      <div className="balance-display-inline">Balance: {balance} AFC</div>
     </div>
   );
 }
