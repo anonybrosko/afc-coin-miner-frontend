@@ -1,20 +1,26 @@
+/* General Body */
 body {
   font-family: Arial, sans-serif;
   background: #0d0d0d;
   color: #f5f5f5;
   text-align: center;
   padding-top: 50px;
+  margin: 0;
 }
 
+/* Container for pages */
 .container {
   max-width: 400px;
-  margin: 0 auto;
+  margin: 50px auto;
   background: #1a1a1a;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 0 20px #00ff99;
+  color: #f5f5f5;
+  text-align: center;
 }
 
+/* Buttons */
 button {
   background: #00ff99;
   color: #000;
@@ -24,8 +30,68 @@ button {
   border-radius: 8px;
   cursor: pointer;
   margin-top: 20px;
+  box-shadow: 0 4px #00cc77;
+  transition: all 0.1s ease-in-out;
 }
 
 button:hover {
   background: #00cc77;
+  transform: translateY(2px);
+  box-shadow: 0 2px #008844;
+}
+
+/* Prestige Button */
+.prestige-button {
+  background: #ffcc00;
+  color: #000;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 3px 3px 8px #ffaa00;
+  font-weight: bold;
+}
+
+.prestige-button:hover {
+  background: #ffaa00;
+}
+
+.prestige-button.disabled {
+  background: #555;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Navigation Links */
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.navbar a {
+  padding: 10px 20px;
+  background-color: #00ff99;
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 4px #00cc77;
+  transition: all 0.1s ease-in-out;
+}
+
+.navbar a:hover {
+  transform: translateY(2px);
+  box-shadow: 0 2px #008844;
+}
+
+/* Balance Display in top right */
+.balance-display {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-weight: bold;
 }
