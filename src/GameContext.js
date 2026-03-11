@@ -13,6 +13,16 @@ export const GameProvider = ({ children }) => {
   const [upgrades, setUpgrades] = useState(saved.upgrades || { pickaxe: 1 });
   const [prestige, setPrestige] = useState(saved.prestige || 0);
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    }; 
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Save state to localStorage on every change
   useEffect(() => {
     localStorage.setItem(
