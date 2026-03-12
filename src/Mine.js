@@ -17,7 +17,7 @@ export default function Mine() {
     
     setTimeout(() => {
       setClicks(prev => prev.filter(c => c.id !== id));
-    }, 800);
+    }, 200);
   };
 
   return (
