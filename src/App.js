@@ -7,7 +7,8 @@ import { GameContext } from  "./GameContext";
 import Home from "./Home";
 import Mine from "./Mine";
 import Upgrades from "./Upgrades";
-import Prestige from "./Prestige"
+import Prestige from "./Prestige";
+import Support from "./Support"
 
 import './App.css';
 
@@ -21,6 +22,7 @@ function Header(){
         <Link to="/mine">Mine</Link>
         <Link to="/upgrades">Upgrades</Link>
         <Link to="/prestige">Prestige</Link>
+        <Link to="/support">Support</Link>
       </nav>
       <div className="balance-display-inline">Balance: {balance.toFixed(8)} AFC</div>
     </header>
@@ -40,6 +42,7 @@ function App() {
             <Route path="/mine" element={<Mine />} />
             <Route path="/upgrades" element={<Upgrades />} />
             <Route path="/prestige" element={<Prestige />} />
+            <Route path="/support" element={<Support />} />
           </Routes>
         </main>
       </div>
