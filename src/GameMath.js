@@ -1,5 +1,5 @@
-export const BASE_PRESTIGE_COST = 5.00000000;
-export const PRESTIGE_MULTIPLIER = 1.6;
+export const BASE_PRESTIGE_COST = 0.01000000;
+export const PRESTIGE_MULTIPLIER = 1.2;
 
 /**
  * Returns the current prestige cost based on the number of prestige points

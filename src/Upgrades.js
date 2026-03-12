@@ -3,7 +3,7 @@ import { GameContext } from "./GameContext";
 import { allUpgrades } from "./UpgradesTable"
 
 const Upgrades = () => {
-  const { balance, upgrades, psuStates, activePsu, buyUpgrade, activatePsu } = useContext(GameContext);
+  const { balance, upgrades, psuStates, activePsu, buyUpgrade, activatePsu, activateNetwork } = useContext(GameContext);
   const [activeCategory, setActiveCategory] = useState("gpu");
 
   // Organize upgrades by category
@@ -93,6 +93,23 @@ const Upgrades = () => {
                   </button>
                 )}
               </div>
+            )}
+
+            {upg.type === "network" && (
+              <button
+                onClick={() => activateNetwork(name)}
+                style={{
+                  padding: "4px 8px",
+                  borderRadius: 4,
+                  border: "none",
+                  backgroundColor: "#ff9800",
+                  color: "#fff",
+                  cursor: "pointer",
+                  marginTop: 5
+                }}
+              >
+                Activate Network Boost
+              </button>
             )}
 
             <button

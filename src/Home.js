@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { GameContext } from "./GameContext";
 
 const Home = () => {
-  const { balance, clicks, hashrate, miningPower, autoMinerCount, prestige, isMobile } = useContext(GameContext);
+  const { balance, clicks, hashrate, miningPower, autoMinerCount, prestige, isMobile, autoMiningAFCPerSec } = useContext(GameContext);
 
   return (
     <>
@@ -31,11 +31,11 @@ const Home = () => {
         </div>
         <div className="card">
           <h2>Hashrate</h2>
-          <p>{hashrate}</p>
+          <p>{autoMiningAFCPerSec.toFixed(8)} per sec</p>
         </div>
         <div className="card">
           <h2>Mining Power</h2>
-          <p>{miningPower}</p>
+          <p>{miningPower.toFixed(8)} per click</p>
         </div>
         <div className="card">
           <h2>Prestige</h2>

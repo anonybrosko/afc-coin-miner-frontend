@@ -22,7 +22,7 @@ function Header(){
         <Link to="/upgrades">Upgrades</Link>
         <Link to="/prestige">Prestige</Link>
       </nav>
-      <div className="balance-display-inline">Balance: {balance.toFixed(7)} AFC</div>
+      <div className="balance-display-inline">Balance: {balance.toFixed(8)} AFC</div>
     </header>
   );
 }
