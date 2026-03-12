@@ -1,4 +1,4 @@
-export const BASE_PRESTIGE_COST = 0.0001;
+export const BASE_PRESTIGE_COST = 5.00000000;
 export const PRESTIGE_MULTIPLIER = 1.6;
 
 /**

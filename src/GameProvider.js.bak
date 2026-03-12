@@ -1,0 +1,50 @@
+import React, { useState, useEffect } from "react";
+import { GameContext } from "./GameContext";
+import { allUpgrades } from "./UpgradesTable";
+import { getPrestigeCost } from "./GameMath";
+import FallingCoins from "./FallingCoins";
+
+export const GameProvider = ({ children }) => {
+  const API = "https://afc-coin-miner-backend.onrender.com";
+  const roundCrypto = (num) => Number(num.toFixed(8));
+
+  const saved = JSON.parse(localStorage.getItem("afcGame")) || {};
+
+  const [balance, setBalance] = useState(saved.balance || 0);
+  const [clicks, setClicks] = useState(saved.clicks || 0);
+  const [upgrades, setUpgrades] = useState(saved.upgrades || {});
+  const [psuStates, setPsuStates] = useState(saved.psuStates || {});
+  const [activePsu, setActivePsu] = useState(saved.activePsu || null);
+  const [prestige, setPrestige] = useState(saved.prestige || 0);
+
+  // Mobile detection, auto-mining, mineCoin, buyUpgrade, activatePsu, doPrestige...
+  // Keep all your previous logic here exactly as you have it
+
+  return (
+    <GameContext.Provider value={{
+      balance,
+      clicks,
+      setBalance,
+      upgrades,
+      prestige,
+      mineCoin,
+      buyUpgrade,
+      doPrestige,
+      // ...other values
+      psuStates,
+      activePsu,
+      activatePsu
+    }}>
+      <FallingCoins />
+      {children}
+      <button
+        onClick={() => {
+          localStorage.removeItem("afcGame");
+          window.location.reload();
+        }}
+      >
+        Reset Game
+      </button>
+    </GameContext.Provider>
+  );
+};

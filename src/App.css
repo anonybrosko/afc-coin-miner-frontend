@@ -1,120 +1,71 @@
-/* General Body */
+/* ----------------------------- */
+/* Global / All Pages            */
+/* ----------------------------- */
 body {
   font-family: Arial, sans-serif;
   background: #0d0d0d;
   color: #f5f5f5;
   text-align: center;
-  padding-top: 50px;
   margin: 0;
-  font-size: 4vw; /* Base font scales with viewport width */
+  font-size: 2vw;
   line-height: 1.4;
 }
 
-/* Headings */ 
 h1 {
-  font-size: 6vw; /* Scales with device */
+  font-size: 6vw;
   color: #00ff99;
   text-shadow: 2px 2px 5px #008844, 0 0 3px #00ff44;
-  margin-bottom: 1rem;
+  margin-bottom: 0.2rem;
 }
 
 h2 {
   font-size: 5vw;
   color: #ffcc00;
   text-shadow: 2px 2px 5px #aa8800, 0 0 8px #ffcc00;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.2rem;
 }
 
 .card {
   background: rgba(30, 30, 30, 0.85);
   border-radius: 12px;
-  padding: 20px;
-  margin: 20px auto;
+  padding: 10px;
+  margin: 10px auto;
   max-width: 400px;
   box-shadow: 0 0 20px #00ff99, 0 0 40px #00ff9944;
-  backdrop-filter: blur(6px); /* glass effect */
+  backdrop-filter: blur(6px);
   color: #f5f5f5;
   text-align: center;
   transition: transform 0.2s ease;
 }
 
-/* ----------------------------- */
-/* Container / Page Wrapper       */
-/* ----------------------------- */
 .container {
   max-width: 400px;
-  z-index: 2;
-  margin: 5vw auto;
-  padding: 4vw;
-  color: #f5f5f5;
+  margin: 5px auto;
+  padding: 5px;
   text-align: center;
   font-size: 1em;
 }
 
-/* Desktop version */
-.container.desktop {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* Mobile version */
-.container.mobile {
-  max-width: 90%;
-  padding: 3vw;
-  font-size: 3.5vw;
-}
-
-.card.hover {
-  transform: translateY(-2px);
-  /* box-shadow: 0 0 12px #00ff99, 0 0 25px #ff9944; */
-}
-
-.blockchain-float {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  pointer-events: none;
-}
-
-.block {
-  width: 20px;
-  height: 20px;
-  background: #00ff99;
-  opacity: 0.2;
-  border-radius: 4px;
-  animation: floatBlock 5s infinite linear;
-}
-
-@keyframes floatBlock {
-  0% { transform: translateY(100vh) translateX(0); }
-  100% { transform: translateY(-20px) translateX(50vw); }
-}
-
-/* ----------------------------- */
-/* Buttons & Upgrade Buttons     */
-/* ----------------------------- */
 button,
 .upgrade-button,
 .prestige-button,
 .navbar a {
   font-size: 3vw;
-  padding: 2vw 4vw;
+  padding: 8px 16px;
   border-radius: 2vw;
-  box-shadow: 0.5vw 0.5vw #00cc77;
+  box-shadow: 2px 2px #00cc77;
   cursor: pointer;
   font-weight: bold;
+  margin: 5px;
   transition: all 0.1s ease-in-out;
-  text-align: center;
-  vertical-align: middle;
-  margin-bottom: 2vw;
 }
 
 button:hover,
 .upgrade-button:hover,
 .prestige-button:hover,
 .navbar a:hover {
-  transform: translateY(0.3vw);
-  box-shadow: 0 0.1vw #008844;
+  transform: translateY(1px);
+  box-shadow: 1px 1px #008844;
 }
 
 /* Disabled Buttons */
@@ -126,8 +77,7 @@ button.disabled,
   box-shadow: none;
 }
 
-
-/* Specific Prestige Button */
+/* Prestige Button */
 .prestige-button {
   background: #ffcc00;
   box-shadow: 0.8vw 0.8vw 2vw #ffaa00;
@@ -146,52 +96,108 @@ button.disabled,
   background: #00cc77;
 }
 
-/* ----------------------------- */
-/* Navigation / Navbar            */
-/* ----------------------------- */
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin-bottom: 10px;
+  gap: 10px;
+  margin-bottom: 5px;
 }
 
 .navbar a {
   background-color: #00ff99;
   color: #000;
   text-decoration: none;
-  border-radius: 2vw;
-  box-shadow: 0.5vw 0.5vw #00cc77;
+  border-radius: 8px;
+  box-shadow: 2px 2px #00cc77;
   font-weight: bold;
 }
 
-
-/* Desktop & Mobile Navbar */
-.navbar.desktop {
-  max-width: 400px;
-  padding: 15px;
-  margin: 0 auto;
+/* ----------------------------- */
+/* Mine Tab Only (Scoped)        */
+/* ----------------------------- */
+.mine-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 100vw;
+  height: 90vh;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
-.navbar.mobile {
-  max-width: 90%;
-  padding: 0 0 3vw 3vw;
-  font-size: 3vw;
+.mine-area {
+  display: flex;
+  flex-direction: column;          /* stack heading + content vertically */
+  /* justify-content: space-between;  /* heading top, content centered */
+  /* align-items: center; */
+  height: 80%;
+  width: 90%;
+  max-width: 500px;
+  padding: 1.5vw;                  /* optional inner spacing */
+  background-color: #111;
+  border: 2px solid #00ff99;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 0.8vw #00ff99, 0 0 1.5vw #00ff9944;
+  user-select: none;
+  position: relative;
+}
+
+.mine-heading {
+  font-size: 4vw;
+  color: #00ff99;
+  text-shadow: 2px 2px 5px #008844, 0 0 3px #00ff44;
+  margin: 0;
+  text-align: center;
+}
+
+.mine-content-wrapper {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mine-content {
+  font-size: 2vw;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
 }
 
 /* ----------------------------- */
 /* Balance Display / Floating Panel */
 /* ----------------------------- */
-.balance-display {
-  position: absolute;
-  top: 2vw;
-  right: 2vw;
+.balance-display-inline {
+  position: relative;
   font-weight: bold;
   font-size: 4vw;
-  background: rgba(0, 255, 153, 0.1);
-  padding: 0.5vw 1vw;
-  border-radius: 0.8vw;
-  box-shadow: 0 0 1vw #00ff99, 0 0 2vw #00ff9944;
+}
+
+/* Click popup */
+.click-popup {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: #00ff99;
+  font-weight: bold;
+  pointer-events: none;
+  opacity: 1;
+  animation: popup-fade 0.8s forwards;
+  font-size: 1.2rem; /* adjustable */
+  text-shadow: 1px 1px 3px #008844;
+}
+
+@keyframes popup-fade {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(-30px);
+  }
 }
 
 /* ----------------------------- */
@@ -206,14 +212,24 @@ button.disabled,
   .upgrade-button,
   .navbar a {
     font-size: 16px;
-    padding: 10px 20px;
+    padding: 5px 10px;
     border-radius: 8px;
     box-shadow: 0 4px #00cc77;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
-  .balance-display {
-    font-size: 16px;
-    top: 20px;
-    right: 20px;
+
+  .balance-display-inline { font-size: 1rem; }
+  .mine-heading { font-size: 2.5rem; }
+  .mine-content { font-size: 1rem; }
+  .mine-page {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0.2vw #00ff99 0 0 0.5vw #00ff9944;
+    padding: 1.5vw;
   }
+  .mine-area { height: 40vh; width: 400px; }
 }

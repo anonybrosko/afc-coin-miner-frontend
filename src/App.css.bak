@@ -6,134 +6,250 @@ body {
   text-align: center;
   padding-top: 50px;
   margin: 0;
+  font-size: 4vw; /* Base font scales with viewport width */
+  line-height: 1.4;
 }
 
 /* Headings */ 
 h1 {
-  font-size: 2.5rem;
+  font-size: 6vw; /* Scales with device */
   color: #00ff99;
   text-shadow: 2px 2px 5px #008844, 0 0 3px #00ff44;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 5vw;
   color: #ffcc00;
   text-shadow: 2px 2px 5px #aa8800, 0 0 8px #ffcc00;
-  margin-bottom: 12px;
+  margin-bottom: 0.8rem;
 }
 
-/* Container for pages */
-.container {
-  max-width: 400px;
-  margin: 50px auto;
-  background: #1a1a1a;
-  padding: 20px;
+.card {
+  background: rgba(30, 30, 30, 0.85);
   border-radius: 12px;
-  box-shadow: 0 0 20px #00ff99;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 400px;
+  box-shadow: 0 0 20px #00ff99, 0 0 40px #00ff9944;
+  backdrop-filter: blur(6px); /* glass effect */
   color: #f5f5f5;
   text-align: center;
+  transition: transform 0.2s ease;
 }
 
-/* Desktop Default */
+/* ----------------------------- */
+/* Container / Page Wrapper       */
+/* ----------------------------- */
+.container {
+  max-width: 400px;
+  z-index: 2;
+  margin: 5vw auto;
+  padding: 4vw;
+  color: #f5f5f5;
+  text-align: center;
+  font-size: 1em;
+}
+
+/* Desktop version */
 .container.desktop {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Mobile Adjustments */
+/* Mobile version */
 .container.mobile {
   max-width: 90%;
-  padding: 15px;
-  font-size: 14px;
+  padding: 3vw;
+  font-size: 3.5vw;
 }
 
-/* Buttons */
-button {
+.card.hover {
+  transform: translateY(-2px);
+  /* box-shadow: 0 0 12px #00ff99, 0 0 25px #ff9944; */
+}
+
+.blockchain-float {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+}
+
+.block {
+  width: 20px;
+  height: 20px;
   background: #00ff99;
-  color: #000;
-  font-size: 16px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 20px;
-  box-shadow: 0 4px #00cc77;
-  transition: all 0.1s ease-in-out;
+  opacity: 0.2;
+  border-radius: 4px;
+  animation: floatBlock 5s infinite linear;
 }
 
-button:hover {
-  background: #00cc77;
-  transform: translateY(2px);
-  box-shadow: 0 2px #008844;
+@keyframes floatBlock {
+  0% { transform: translateY(100vh) translateX(0); }
+  100% { transform: translateY(-20px) translateX(50vw); }
 }
 
-/* Prestige Button */
-.prestige-button {
-  background: #ffcc00;
-  color: #000;
-  font-size: 16px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
+/* ----------------------------- */
+/* Buttons & Upgrade Buttons     */
+/* ----------------------------- */
+button,
+.upgrade-button,
+.prestige-button,
+.navbar a {
+  font-size: 3vw;
+  padding: 2vw 4vw;
+  border-radius: 2vw;
+  box-shadow: 0.5vw 0.5vw #00cc77;
   cursor: pointer;
-  margin-top: 20px;
-  box-shadow: 3px 3px 8px #ffaa00;
   font-weight: bold;
+  transition: all 0.1s ease-in-out;
+  text-align: center;
+  vertical-align: middle;
+  margin-bottom: 2vw;
 }
 
-.prestige-button:hover {
-  background: #ffaa00;
+button:hover,
+.upgrade-button:hover,
+.prestige-button:hover,
+.navbar a:hover {
+  transform: translateY(0.3vw);
+  box-shadow: 0 0.1vw #008844;
 }
 
+/* Disabled Buttons */
+button.disabled,
+.upgrade-button.disabled,
 .prestige-button.disabled {
   background: #555;
   cursor: not-allowed;
   box-shadow: none;
 }
 
-/* Navigation Links */
+
+/* Specific Prestige Button */
+.prestige-button {
+  background: #ffcc00;
+  box-shadow: 0.8vw 0.8vw 2vw #ffaa00;
+}
+
+.prestige-button:hover {
+  background: #ffaa00;
+}
+
+/* Upgrade Buttons */
+.upgrade-button {
+  background: #00ff99;
+}
+
+.upgrade-button:hover {
+  background: #00cc77;
+}
+
+/* Heading outside tap area */
+.mine-heading {
+  font-size: 24px;
+  text-align: center;
+  color: #00ff99;
+  text-shadow: 2px 2px 5px #008844, 0 0 3px #00ff44;
+  margin: 1rem 0;
+}
+
+/* Mine Area - now only tap area */
+.mine-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  width: 80vw;
+  max-width: 500px;
+  max-height: 600px;
+  margin: 0 auto;
+  background-color: #111;
+  border: 2px solid #00ff99;
+  border-radius: 16px;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  box-shadow: 0 0 2vw #00ff99, 0 0 4vw #00ff9944;
+}
+
+/* Tap area text */
+.mine-content {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* ----------------------------- */
+/* Navigation / Navbar            */
+/* ----------------------------- */
 .navbar {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 15px;
+  margin-bottom: 10px;
 }
 
-/* Desktop Default */
+.navbar a {
+  background-color: #00ff99;
+  color: #000;
+  text-decoration: none;
+  border-radius: 2vw;
+  box-shadow: 0.5vw 0.5vw #00cc77;
+  font-weight: bold;
+}
+
+
+/* Desktop & Mobile Navbar */
 .navbar.desktop {
   max-width: 400px;
-  padding: 20px;
+  padding: 0 10px 15px 20%;
   margin: 0 auto;
 }
 
 .navbar.mobile {
   max-width: 90%;
-  padding: 0 0 15px 15px ;
-  font-size: 12px;
+  padding: 0 0 3vw 3vw;
+  font-size: 3vw;
 }
 
-.navbar a {
-  padding: 10px 20px;
-  background-color: #00ff99;
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  box-shadow: 0 4px #00cc77;
-  transition: all 0.1s ease-in-out;
-}
-
-.navbar a:hover {
-  transform: translateY(2px);
-  box-shadow: 0 2px #008844;
-}
-
-/* Balance Display in top right */
+/* ----------------------------- */
+/* Balance Display / Floating Panel */
+/* ----------------------------- */
 .balance-display {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 2vw;
+  right: 2vw;
   font-weight: bold;
+  font-size: 4vw;
+  background: rgba(0, 255, 153, 0.1);
+  padding: 0.5vw 1vw;
+  border-radius: 0.8vw;
+  box-shadow: 0 0 1vw #00ff99, 0 0 2vw #00ff9944;
+}
+
+/* ----------------------------- */
+/* Media Query: Large Screens     */
+/* ----------------------------- */
+@media (min-width: 1024px) {
+  body { font-size: 16px; }
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  button,
+  .prestige-button,
+  .upgrade-button,
+  .navbar a {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px #00cc77;
+    margin-bottom: 10px;
+  }
+  .balance-display {
+    font-size: 16px;
+    top: 20px;
+    right: 20px;
+  }
 }
