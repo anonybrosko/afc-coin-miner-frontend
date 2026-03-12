@@ -95,12 +95,13 @@ const Upgrades = () => {
               </div>
             )}
 
-            {upg.type === "network" && (
+            {upg.type === "network" && level > 0 && (
               <button
                 onClick={() => activateNetwork(name)}
+                disabled={level === 0}
                 style={{
                   padding: "4px 8px",
-                  borderRadius: 4,
+                  borderRadius: 5,
                   border: "none",
                   backgroundColor: "#ff9800",
                   color: "#fff",
