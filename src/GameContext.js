@@ -1,4 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
+import { allUpgrades } from "./UpgradesTable"
+import { getPrestigeCost } from "./GameMath"
 import FallingCoins from "./FallingCoins"
 
 export const GameContext = createContext();
@@ -6,73 +8,6 @@ export const GameContext = createContext();
 const API = "https://afc-coin-miner-backend.onrender.com";
 
 const roundCrypto = (num) => Number(num.toFixed(8));
-
-export const allUpgrades = {
-  // PSU
-  "evga-psu": {
-    type: "psu",
-    label: "EVGA PSU",
-    baseCost: 0.00001,   // starting cost
-    energy: 0.001,        // per PSU
-    effect: 0.000001,      // auto-mining per second
-    description: "Boosts auto-mining while energy lasts"
-  },
-  "corsair-psu": {
-    type: "psu",
-    label: "Corsair PSU",
-    baseCost: 0.000025,
-    energy: 0.002,
-    effect: 0.000015,
-    description: "Stronger PSU, more energy per second"
-  },
-  // GPU
-  "nvidia-rtx": {
-    type: "gpu",
-    label: "NVIDIA RTX",
-    baseCost: 0.00005,
-    effect: 0.00002,
-    description: "Increases auto-mining speed"
-  },
-  "amd-radeon": {
-    type: "gpu",
-    label: "AMD Radeon",
-    baseCost: 0.00003,
-    effect: 0.000018,
-    description: "Slightly slower, cheaper GPU boost"
-  },
-  // CPU
-  "intel-i9": {
-    type: "cpu",
-    label: "Intel i9",
-    baseCost: 0.00001,
-    effect: 0.000005,
-    description: "Boosts manual mining per click"
-  },
-  "amd-ryzen": {
-    type: "cpu",
-    label: "AMD Ryzen",
-    baseCost: 0.000007,
-    effect: 0.000004,
-    description: "Boosts manual mining slightly less"
-  },
-  // Network
-  "fiber-network": {
-    type: "network",
-    label: "Fiber Network",
-    baseCost: 0.0001,
-    duration: 60,
-    effect: 1.2,
-    description: "Increases mining output for a limited time"
-  },
-  "dsl-network": {
-    type: "network",
-    label: "DSL Network",
-    baseCost: 0.00005,
-    duration: 30,
-    effect: 1.05,
-    description: "Small mining boost for short time"
-  },
-};
 
 export const GameProvider = ({ children }) => {
   // Load saved state
@@ -189,7 +124,8 @@ export const GameProvider = ({ children }) => {
 
   // Prestige
   const doPrestige = () => {
-    const earnedPrestige = Math.floor(balance / 0.0001);
+    const prestigeThreshold = getPrestigeCost(prestige)
+    const earnedPrestige = Math.floor(balance / prestigeThreshold);
     if (earnedPrestige <= 0) return;
 
     setBalance(0);
