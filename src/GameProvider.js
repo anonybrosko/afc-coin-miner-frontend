@@ -250,7 +250,13 @@ export const GameProvider = ({ children }) => {
       <button
         onClick={() => {
           localStorage.removeItem("afcGame");
-          window.location.reload();
+          setBalance(0);
+          setClicks(0);
+          setUpgrades({});
+          setPsuStates({});
+          setActivePsu(null);
+          setPrestige(0);
+          setActiveNetworks([]);
         }}
       >
         Reset Game
