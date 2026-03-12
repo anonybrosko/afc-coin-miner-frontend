@@ -10,25 +10,19 @@ const Support = () => {
       </p>
 
       {/* Example buttons for donations */}
-      <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
-        <a
-          href="https://www.buymeacoffee.com/yourusername"
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={() =>  window.location.href = "https://www.buymeacoffee.com/bbrown9627l"}
           className="btn"
         >
           Buy me a coffee ☕
-        </a>
-        <a
-          href="https://paypal.me/yourusername"
-          target="_blank"
-          rel="noopener noreferrer"
+        </button>
+        <button
+          onClick={() => window.location.href = "https://paypal.me/techbrown24"}
           className="btn"
         >
           PayPal 💰
-        </a>
+        </button>
       </div>
-    </div>
   );
 };
 

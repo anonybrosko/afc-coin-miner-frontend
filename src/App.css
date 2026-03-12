@@ -12,7 +12,7 @@ body {
   color: #f5f5f5;
   text-align: center;
   margin: 0;
-  font-size: 2vw;
+  font-size: 3vw;
   line-height: 1.4;
 }
 
@@ -24,7 +24,7 @@ h1 {
 }
 
 h2 {
-  font-size: 5vw;
+  font-size: 4vw;
   color: #ffcc00;
   text-shadow: 2px 2px 5px #aa8800, 0 0 8px #ffcc00;
   margin-bottom: 0.2rem;
@@ -43,6 +43,10 @@ h2 {
   transition: transform 0.2s ease;
 }
 
+.app-header {
+  color: #000;
+}
+
 .container {
   max-width: 400px;
   margin: 5px auto;
@@ -56,7 +60,7 @@ button,
 .prestige-button,
 .navbar a {
   font-size: 3vw;
-  padding: 8px 16px;
+  padding: 6px 12px;
   border-radius: 2vw;
   box-shadow: 2px 2px #00cc77;
   cursor: pointer;
@@ -105,13 +109,12 @@ button.disabled,
 .navbar {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 0;
   margin-bottom: 5px;
 }
 
 .navbar a {
   background-color: #00ff99;
-  color: #000;
   text-decoration: none;
   border-radius: 8px;
   box-shadow: 2px 2px #00cc77;
@@ -210,8 +213,8 @@ button.disabled,
 /* ----------------------------- */
 @media (min-width: 1024px) {
   body { font-size: 16px; }
-  h1 { font-size: 2.5rem; }
-  h2 { font-size: 2rem; }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
   button,
   .prestige-button,
   .upgrade-button,
@@ -221,6 +224,9 @@ button.disabled,
     border-radius: 8px;
     box-shadow: 0 4px #00cc77;
     margin-bottom: 5px;
+  }
+  .app-header {
+    color: #fff;
   }
 
   .balance-display-inline { font-size: 1rem; }
