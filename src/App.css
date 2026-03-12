@@ -43,10 +43,6 @@ h2 {
   transition: transform 0.2s ease;
 }
 
-.app-header {
-  color: #000;
-}
-
 .container {
   max-width: 400px;
   margin: 5px auto;
@@ -224,9 +220,6 @@ button.disabled,
     border-radius: 8px;
     box-shadow: 0 4px #00cc77;
     margin-bottom: 5px;
-  }
-  .app-header {
-    color: #fff;
   }
 
   .balance-display-inline { font-size: 1rem; }
