@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
-import { GameContext, allUpgrades } from "./GameContext";
+import { allUpgrades } from "./UpgradesTable";
+import { GameContext } from "./GameContext";
 
 const Upgrades = () => {
   const { balance, upgrades, psuStates, activePsu, buyUpgrade, activatePsu } = useContext(GameContext);

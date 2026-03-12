@@ -113,8 +113,8 @@ button:hover,
 .upgrade-button:hover,
 .prestige-button:hover,
 .navbar a:hover {
-  transform: translateY(0.5vw);
-  box-shadow: 0 0.5vw #008844;
+  transform: translateY(0);
+  box-shadow: 0 0.1vw #008844;
 }
 
 /* Disabled Buttons */
